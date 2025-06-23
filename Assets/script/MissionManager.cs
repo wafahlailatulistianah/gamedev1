@@ -11,7 +11,7 @@ public class MissionManager : MonoBehaviour
 
     public string targetBuah = "Apel";
     public int targetJumlah = 5;
-    public float waktuMaks = 30f;
+    public float waktuMaks = 50f;
 
     private float waktuTersisa;
     private bool isMissionActive = true;
@@ -42,6 +42,7 @@ public class MissionManager : MonoBehaviour
 
     public void KurangiWaktu(float jumlah)
     {
+        Debug.Log("Kurangi waktu dipanggil: " + jumlah + " detik");
         if (!isMissionActive) return;
 
         waktuTersisa -= jumlah;
@@ -49,8 +50,9 @@ public class MissionManager : MonoBehaviour
         {
             waktuTersisa = 0;
             GameOver("Waktu habis karena buah salah!");
-        }
+        }   
     }
+
 
     public void GameOver(string pesan)
     {

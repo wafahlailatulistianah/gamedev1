@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3934670889329694253}
   - component: {fileID: 4943813984381624213}
   - component: {fileID: 8557982001420193730}
+  - component: {fileID: 1466796609527490671}
   m_Layer: 0
   m_Name: jambu
   m_TagString: jambu
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 12.375, y: 12.8125}
   m_EdgeRadius: 0
+--- !u!114 &1466796609527490671
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1008368016734705264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f665c82e4d6d65c4f85643844877ae60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

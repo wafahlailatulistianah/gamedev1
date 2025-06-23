@@ -4,12 +4,24 @@ using UnityEngine;
 
 public class FruitPickup : MonoBehaviour
 {
-    private void OnTriggerEnter2D(Collider2D other)
+    void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("player"))
         {
-            other.GetComponent<FruitCollector>().TambahApel(); // tambah angka apel
-            Destroy(gameObject); // hilangkan apel
+            FruitCollector collector = other.GetComponent<FruitCollector>();
+
+            if (collector == null) return;
+
+            if (gameObject.CompareTag("apel"))
+            {
+                collector.TambahApel();
+            }
+            else if (gameObject.CompareTag("delima") || gameObject.CompareTag("jambu"))
+            {
+                collector.KurangiWaktu(5f); // Kurangi waktu 5 detik
+            }
+
+            Destroy(gameObject); // Buah menghilang setelah disentuh
         }
     }
 }

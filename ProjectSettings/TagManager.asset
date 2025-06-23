@@ -8,6 +8,13 @@ TagManager:
   - delima
   - jambu
   - player
+  - jeruk
+  - alpukat
+  - pisang
+  - ceri
+  - pir
+  - stroberry
+  - anggur
   layers:
   - Default
   - TransparentFX
