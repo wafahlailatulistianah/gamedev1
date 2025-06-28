@@ -6,6 +6,11 @@ public class MissionManager_Level3 : MonoBehaviour
     public TextMeshProUGUI timerText;
     public FruitCollector_Level3 fruitCollector;
 
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI resultText;
+
+    public PlayerMovement playerMovement; // Tambahan
+
     public string targetBuah = "Strawberry";
     public int targetJumlah = 5;
     public float waktuMaks = 50f;
@@ -16,6 +21,8 @@ public class MissionManager_Level3 : MonoBehaviour
     void Start()
     {
         waktuTersisa = waktuMaks;
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false); // Sembunyikan panel di awal
     }
 
     void Update()
@@ -27,6 +34,7 @@ public class MissionManager_Level3 : MonoBehaviour
 
         if (waktuTersisa <= 0)
         {
+            waktuTersisa = 0;
             GameOver("Waktu habis!");
         }
 
@@ -50,12 +58,31 @@ public class MissionManager_Level3 : MonoBehaviour
     {
         isMissionActive = false;
         Debug.Log("Gagal! " + pesan);
+
+        if (playerMovement != null)
+            playerMovement.DisableMovement(); // Tambahan
+
+        if (gameOverPanel != null && resultText != null)
+        {
+            resultText.text = "Gagal!\n" + pesan;
+            gameOverPanel.SetActive(true);
+        }
     }
 
     void SelesaiMisi()
     {
         isMissionActive = false;
         Debug.Log("Selamat! Misi Selesai!");
-        PlayerPrefs.SetInt("UnlockedLevel", 4); // opsional kalau ada level 4
+
+        if (playerMovement != null)
+            playerMovement.DisableMovement(); // Tambahan
+
+        PlayerPrefs.SetInt("UnlockedLevel", 4);
+
+        if (gameOverPanel != null && resultText != null)
+        {
+            resultText.text = "Selamat! Misi Selesai!";
+            gameOverPanel.SetActive(true);
+        }
     }
 }

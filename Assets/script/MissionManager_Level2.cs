@@ -8,9 +8,13 @@ public class MissionManager_Level2 : MonoBehaviour
     public TextMeshProUGUI timerText;
     public FruitCollector_Level2 fruitCollector;
 
+    public GameObject gameOverPanel;
+    public TextMeshProUGUI resultText;
+    public PlayerMovement playerMovement;
+
     public string targetBuah = "Jeruk";
     public int targetJumlah = 5;
-    public float waktuMaks = 50f;
+    public float waktuMaks = 90f;
 
     private float waktuTersisa;
     private bool isMissionActive = true;
@@ -19,10 +23,11 @@ public class MissionManager_Level2 : MonoBehaviour
     {
         waktuTersisa = waktuMaks;
 
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+
         if (fruitCollector == null)
-        {
             Debug.LogError("FruitCollector_Level2 belum di-assign di Inspector!");
-        }
     }
 
     void Update()
@@ -60,12 +65,31 @@ public class MissionManager_Level2 : MonoBehaviour
     {
         isMissionActive = false;
         Debug.Log("Gagal! " + pesan);
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
+        if (gameOverPanel != null && resultText != null)
+        {
+            resultText.text = "Gagal!\n" + pesan;
+            gameOverPanel.SetActive(true);
+        }
     }
 
     void SelesaiMisi()
     {
         isMissionActive = false;
         Debug.Log("Selamat! Misi Selesai!");
-        PlayerPrefs.SetInt("UnlockedLevel", 3); // membuka level 3
+
+        if (playerMovement != null)
+            playerMovement.enabled = false;
+
+        PlayerPrefs.SetInt("UnlockedLevel", 3);
+
+        if (gameOverPanel != null && resultText != null)
+        {
+            resultText.text = "Selamat!\nMisi Selesai!";
+            gameOverPanel.SetActive(true);
+        }
     }
 }
